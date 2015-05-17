@@ -1,0 +1,88 @@
+<br/>
+<br/>
+<div>
+  <h1>Détails de {{currentUser.name}} {{currentUser.surname}} :</h1>
+
+  <p><strong>Nom :</strong> {{currentUser.name}}</p>
+
+  <p><strong>Prénom :</strong> {{currentUser.surname}}</p>
+
+  <p><strong>Email :</strong> {{currentUser.email}}</p>
+
+  <p><strong>Site web :</strong> {{currentUser.website}}</p>
+  <br/>
+  <p>
+  <strong>Projets réalisés :</strong>
+    <br />(Cliquez sur la corbeille pour ne plus associer le projet à l'utilisateur)
+  </p>
+  <ul id="projectList">
+    <li ng-repeat="project in projects"><br/><a ng-href="#/projects/{{project.id}}">{{project.title}}
+      {{project.year}}</a>
+      <a class="trash" ng-click="removeProj(project.id)"><i class="glyphicon glyphicon-trash"></i></a>
+      <br/><i>Rôle :</i>
+        <p class ="roleList" ng-repeat="role in roles" ng-show="showRole(role.ProjectId, project.id)">{{role.name}}</p>
+    </li>
+    </ul>
+  <br/>
+  <a ng-click="showAllProjects()"><i>Cliquez ici pour associer des projets à l'utilisateur.</i></a>
+
+  <div ng-show="showProjects()">
+    <br/>
+
+    <p><i>Cliquez sur un projet pour l'associer à l'utilisateur</i></p>
+    <ul>
+      <li ng-repeat="project in allProjects"><a ng-click="addProject(project.id)">{{project.title}} {{project.year}}</a>
+      </li>
+    </ul>
+  </div>
+  <br/>
+  <br/>
+  <a ng-click="showOnClick()" class="btn btn-small btn-primary">Mettre à jour cet utilisateur</a>
+  <a class="btn btn-small btn-danger" ng-click="deleteUsr()"><strong>Supprimer l'utilisateur</strong></a>
+</div>
+<div ng-show="show()" id="updateForm">
+  <hr/>
+  <form novalidate="novalidate" class="form-horizontal">
+    <div class="control-group">
+      <label class="control-label">Prénom :</label>
+
+      <div class="controls">
+        <input type="text" ng-model="surname" value="{{currentUser.surname}}"/>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">Nom :</label>
+
+      <div class="controls">
+        <input type="text" value="{{currentUser.name}}" ng-model="name"/>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">Email :</label>
+
+      <div class="controls">
+        <input type="email" ng-model="email" value="{{currentUser.email}}"/>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">Site web :</label>
+
+      <div class="controls">
+        <input type="url" ng-model="website" value="{{currentUser.website}}"/>
+      </div>
+    </div>
+    <div class="control-group">
+      <br/>
+
+      <div class="controls">
+        <a ng-click="cancel()" class="btn btn-small">Annuler</a>
+        <a ng-click="updateUsr()" class="btn btn-small btn-success">Valider</a>
+      </div>
+    </div>
+  </form>
+</div>
+<br/>
+<br/>
+<p><i>Création : {{currentUser.createdAt}}</i></p>
+<p><i>Dernière modification : {{currentUser.updatedAt}}</i></p>
+<br/>

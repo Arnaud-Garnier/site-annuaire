@@ -1,0 +1,74 @@
+<br/>
+<br/>
+<div>
+  <h1>Détails du projet {{currentProject.title}}</h1>
+  <br/>
+
+  <p><strong>Nom du projet :</strong> {{currentProject.title}}</p>
+
+  <p><strong>Année :</strong> {{currentProject.year}}</p>
+
+  <p><strong>Equipe : </strong><a id="addUsrIcon" ng-click="showUsers()" ng-show="switching()"><i>Ajouter des utilisateurs</i></a>
+
+  <div ng-show="switching()">
+    <i>Sélectionnez les utilisateurs à ajouter au projet.</i>
+    <br/>
+    <br/>
+    <ul>
+      <li ng-repeat="user in allUsers"><a ng-click="addUserToProject(user.id)">{{user.name}} {{user.surname}}</a></li>
+    </ul>
+    <a ng-click="switching()"><i>Cliquez ici pour réduire la liste.</i></a>
+  </div>
+  <ul>
+    <li ng-repeat="user in users"><a ng-href="#/users/{{user.id}}">{{user.name}} {{user.surname}}</a>
+      (<i ng-repeat="role in roles"><span ng-show="showRole(role.UserId, user.id)">{{role.name}}</span></i>)
+      <a class="trash" ng-click="deleteUserFromProject(user.id)"><i class="glyphicon glyphicon-trash"></i></a></li>
+  </ul>
+  <p><strong>Description :</strong> {{currentProject.description}}</p>
+  <br/>
+  <a ng-click="showOnClick()" class="btn btn-small btn-primary">Mettre à jour</a>
+  <a ng-click="deleteProj()" class="btn btn-small btn-danger"><strong>Supprimer le projet</strong></a>
+  <br/>
+  <br/>
+
+  <div ng-show="show()" id="updateForm">
+    <hr/>
+    <form novalidate="novalidate" class="form-horizontal">
+      <div class="control-group">
+        <label class="control-label">Titre :</label>
+
+        <div class="controls">
+          <input type="text" ng-model="title" placeholder="{{currentProject.title}}"/>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Année :</label>
+
+        <div class="controls">
+          <input type="number" ng-model="year" placeholder="{{currentProject.year}}"/>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Description :</label>
+
+        <div class="controls">
+          <textarea ng-model="description" placeholder="{{currentProject.description}}"/>
+        </div>
+      </div>
+      <div class="control-group">
+        <br/>
+
+        <div class="controls">
+          <a ng-click="cancel()" class="btn btn-small">Annuler</a>
+          <a ng-click="updateProj()" class="btn btn-small btn-success">Valider</a>
+        </div>
+      </div>
+    </form>
+  </div>
+  <br/>
+
+  <p><i>Créé le {{currentProject.createdAt}}</i></p>
+
+  <p><i>Dernière modification le {{currentProject.updatedAt}}</i></p>
+  <br/>
+</div>

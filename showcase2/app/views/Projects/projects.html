@@ -1,0 +1,17 @@
+<br/>
+<br/>
+<div>
+  <h2>Rechercher un projet</h2>
+  <div class="black">
+    <input type="text" ng-model="searchValue" placeholder="Rechercher un projet"/>
+    <span id="gauche">
+      <a ng-href="#/create" class="btn btn-small btn-primary">Ajouter un projet</a>
+    </span>
+  </div>
+  <br />
+  <hr/>
+  <ul id="projectList">
+    <li class="proj" ng-repeat="project in projects | filter: searchValue "><a ng-href="#/projects/{{project.id}}">{{project.title}}<br />{{project.year}}</a></li>
+  </ul>
+  <br/>
+</div>
